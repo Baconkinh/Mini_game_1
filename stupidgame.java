@@ -1,11 +1,12 @@
 import java.util.Scanner;
 
-public class stupidgame {
+public class test {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
         System.out.print("How many pencils would you like to use: ");
-        int pencils = scan.nextInt();
+        String pencilss = scan.nextLine();
+        int pencils=Integer.parseInt(pencilss);
         scan.nextLine();
 
         System.out.print("Player 1 name: ");
@@ -16,9 +17,7 @@ public class stupidgame {
 
         int turn = 0; 
 
-
         while (pencils > 0) {
-
             for (int i = 0; i < pencils; i++) {
                 if (i > 0 && i % 5 == 0) {
                     System.out.print(" "); 
@@ -33,29 +32,26 @@ public class stupidgame {
                 System.out.println(player2 + "'s turn:");
             }
 
-  
-            int remove = scan.nextInt();
-
-
-            while (remove < 1 || remove > 3 || remove > pencils) {
-                if (remove > pencils) {
-                    System.out.println("Not enough pencils left. Try again.");
-                } else {
+            String remove = scan.nextLine();
+            /*if(remove instanceof String){System.out.println("Truse");}else{System.out.println("false");}*/
+            try {
+                int removetoint = Integer.parseInt(remove);
+                if (removetoint < 1 || removetoint > 3) {
                     System.out.println("Possible values: '1', '2', or '3'");
+                } else {
+                    pencils -= removetoint;
+                    turn = 1 - turn;
                 }
-                remove = scan.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("Possible values: '1', '2', or '3'");
             }
-
-            pencils -= remove; 
-            turn = 1 - turn;
         }
 
-        if (turn == 0) {
-            System.out.println(player1 + " won!");
-        } else {
-            System.out.println(player2 + " won!");
-        }
-
-        scan.close();
+    if (turn == 0) {
+        System.out.println(player1 + " won!");
+    }else {
+        System.out.println(player2 + " won!");
     }
+}
+
 }
